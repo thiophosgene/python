@@ -87,7 +87,7 @@ if __name__ == "__main__":
                             .select('DISTRICT_ct', 'crime_type', 'inc')
                             )
     
-    # вычисляем lat и lng
+    # calculating lat и lng
     mean_lat = (crime_df
                .select('DISTRICT', 'Lat')
                .groupBy('DISTRICT')
@@ -104,7 +104,7 @@ if __name__ == "__main__":
                .withColumnRenamed('avg(Long)', 'lng')
                )
     
-    # собираем результат.
+    # combining everything
     df = (crimes_total
           .join(crimes_monthly, crimes_total.DISTRICT == crimes_monthly.DISTRICT_monthly)  
           .drop('DISTRICT_monthly')        
