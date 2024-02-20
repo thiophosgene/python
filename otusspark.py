@@ -75,10 +75,10 @@ if __name__ == "__main__":
                                     split(crime_df_name.NAME, '-')[0].alias('crime_type'), 
                                     'INCIDENT_NUMBER')                                                    
                             .groupBy('DISTRICT', 'crime_type')
-                            .agg(countDistinct('INCIDENT_NUMBER').alias('count_incidens'))
+                            .agg(countDistinct('INCIDENT_NUMBER').alias('count_incidents'))
                             .orderBy(asc('DISTRICT'), desc('count_incidens'))
                             )
-    window_arg = Window.partitionBy('DISTRICT').orderBy(desc('count_incidens'))
+    window_arg = Window.partitionBy('DISTRICT').orderBy(desc('count_incidents'))
     
     window_df = (district_code_df
                             .withColumn('inc', row_number().over(window_arg))
